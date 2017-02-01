@@ -1,7 +1,7 @@
 {
   "name": "consumption-cli",
   "version": "0.0.1",
-  "description": "check your Tele2 subscription data usage",
+  "description": "check your current subscription data usage",
   "main": "./distribution/index.js",
   "scripts": {
     "test": "echo 'no tests'",
