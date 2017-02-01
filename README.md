@@ -1,6 +1,6 @@
 # consumption-cli
 
-Check your Tele2 data usage.
+Check your current Tele2 subscription data usage.
 
 ```
 $ npm install -g consumption-cli
