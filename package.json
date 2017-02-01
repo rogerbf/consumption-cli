@@ -1,0 +1,48 @@
+{
+  "name": "consumption-cli",
+  "version": "0.0.1",
+  "description": "check your Tele2 subscription data usage",
+  "main": "./distribution/index.js",
+  "scripts": {
+    "test": "echo 'no tests'",
+    "prebuild": "npm test && rimraf distribution",
+    "build": "cross-env BABEL_ENV=production babel --out-dir distribution source",
+    "prepublish": "npm run nsp && npm run build",
+    "start": "npm run build && node ./distribution/index.js",
+    "watch:start": "chokidar \"source/*.js\" \"source/**/*.js\" -c \"npm run start\"",
+    "eslint": "eslint source",
+    "eslint:fix": "eslint --fix source",
+    "repl": "npm run build && babel-node",
+    "nsp": "nsp check"
+  },
+  "keywords": [
+    "Tele2",
+    "Mitt Tele2"
+  ],
+  "author": "rogerbf <roger@bergfalk.nu> (http://bergfalk.nu/)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "chokidar-cli": "^1.2.0",
+    "cross-env": "^3.1.4",
+    "eslint": "^3.14.1",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "nsp": "^2.6.2",
+    "rimraf": "^2.5.4"
+  },
+  "files": [
+    "distribution",
+    "README.md"
+  ],
+  "dependencies": {
+    "consumption": "^0.0.2"
+  },
+  "binary": {
+    "consumption": "./distribution/index.js"
+  }
+}

@@ -1,0 +1,6 @@
+node_modules
+distribution
+.DS_Store
+package
+consumption-cli*.tgz
+npm-debug.log
