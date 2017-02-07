@@ -1,6 +1,6 @@
 {
   "name": "consumption-cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "check your current Tele2 subscription data usage",
   "main": "./distribution/index.js",
   "scripts": {
@@ -40,7 +40,8 @@
     "README.md"
   ],
   "dependencies": {
-    "consumption": "^0.0.2"
+    "consumption": "^0.0.2",
+    "moment": "^2.17.1"
   },
   "bin": {
     "consumption": "./distribution/index.js"
