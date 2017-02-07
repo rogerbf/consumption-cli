@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import consumption from 'consumption'
+import moment from 'moment'
 
 consumption.tele2({
   username: process.argv[2] || process.env.TELE2USERNAME,
@@ -25,9 +26,17 @@ consumption.tele2({
   //   }
   // }
   data.consumption.listOfBuckets.map(
-    ({ total, usedPercentage, used, toBeRestoredString }) => {
-      console.log(`Used data: ${used} (${usedPercentage}%) of ${total / 1024} GB - Resets: ${toBeRestoredString}`)
+    ({ total, leftToUsePercentage, usedPercentage, used, toBeRestoredString }) => {
+      const gigabytes = total / 1024
+      const daysFromNow = moment(toBeRestoredString).diff(moment(), `days`)
+      const remainingDayRate = gigabytes * (leftToUsePercentage / 100)
+      console.log(`Data used: ${used} of ${gigabytes} GB (${usedPercentage}%) \u30FB ${daysFromNow} days until reset (${toBeRestoredString})`)
+      remainingDayRate > 0 && console.log(`You can use ${remainingDayRate} GB per day on average`)
     }
   )
 })
-.catch(console.error.bind(null, `There was an error:\n`))
+.catch(error => {
+  process.stdout.write(`There was a problem connecting to Tele2\n`)
+  process.env.DEBUG === `consumption` && console.log(error)
+  process.exit()
+})
