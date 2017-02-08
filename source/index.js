@@ -29,9 +29,11 @@ consumption.tele2({
     ({ total, leftToUsePercentage, usedPercentage, used, toBeRestoredString }) => {
       const gigabytes = total / 1024
       const daysFromNow = moment(toBeRestoredString).diff(moment(), `days`)
-      const remainingDayRate = gigabytes * (leftToUsePercentage / 100)
+      const remainingDayRate = (gigabytes * (leftToUsePercentage / 100)) / daysFromNow
       console.log(`Data used: ${used} of ${gigabytes} GB (${usedPercentage}%) \u30FB ${daysFromNow} days until reset (${toBeRestoredString})`)
-      remainingDayRate > 0 && console.log(`You can use ${remainingDayRate} GB per day on average`)
+
+      remainingDayRate > 0 &&
+      console.log(`Enough for a continued average use of: ${remainingDayRate.toString().replace(`.`, `,`)} GB/day`)
     }
   )
 })
