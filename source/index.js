@@ -33,7 +33,7 @@ consumption.tele2({
       console.log(`Data used: ${used} of ${gigabytes} GB (${usedPercentage}%) \u30FB ${daysFromNow} days until reset (${toBeRestoredString})`)
 
       remainingDayRate > 0 &&
-      console.log(`Enough for a continued average use of: ${remainingDayRate.toString().replace(`.`, `,`)} GB/day`)
+      console.log(`Enough for a continued average use of: ${remainingDayRate.toPrecision(3).toString().replace(`.`, `,`)} GB/day`)
     }
   )
 })
