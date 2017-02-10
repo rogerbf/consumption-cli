@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import consumption from 'consumption'
 import moment from 'moment'
+import chalk from 'chalk'
 
 consumption.tele2({
   username: process.argv[2] || process.env.TELE2USERNAME,
@@ -30,15 +31,15 @@ consumption.tele2({
       const gigabytes = total / 1024
       const daysFromNow = moment(toBeRestoredString).diff(moment(), `days`)
       const remainingDayRate = (gigabytes * (leftToUsePercentage / 100)) / daysFromNow
-      console.log(`Data used: ${used} of ${gigabytes} GB (${usedPercentage}%) \u30FB ${daysFromNow} days until reset (${toBeRestoredString})`)
+      console.log(`Consumption: ${chalk.bold(`${usedPercentage} % \u30FB ${used}/${gigabytes} GB \u30FB ${daysFromNow} days`)} until reset (${toBeRestoredString})`)
 
       remainingDayRate > 0 &&
-      console.log(`Enough for a continued average use of: ${remainingDayRate.toPrecision(3).replace(`.`, `,`)} GB/day`)
+      console.log(`Continued average use: ${chalk.bold(`${remainingDayRate.toPrecision(3).replace(`.`, `,`)} GB/day`)}`)
     }
   )
 })
 .catch(error => {
-  process.stdout.write(`There was a problem connecting to Tele2\n`)
+  process.stdout.write(`${chalk.red(`Error:`)} There was a problem connecting to Tele2\n`)
   process.env.DEBUG === `consumption` && console.log(error)
   process.exit()
 })
