@@ -47,5 +47,13 @@
   },
   "bin": {
     "consumption": "./distribution/index.js"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rogerbf/consumption-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rogerbf/consumption-cli/issues"
+  },
+  "homepage": "https://github.com/rogerbf/consumption-cli#readme"
 }
