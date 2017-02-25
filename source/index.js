@@ -34,7 +34,7 @@ consumption.tele2({
       console.log(`Consumption: ${chalk.bold(`${usedPercentage} % \u30FB ${used}/${gigabytes} GB \u30FB ${daysFromNow} days`)} until reset (${toBeRestoredString})`)
 
       remainingDayRate > 0 &&
-      console.log(`Continued average use: ${chalk.bold(`${remainingDayRate.toPrecision(3).replace(`.`, `,`)} GB/day`)}`)
+      console.log(`Remaining daily rate: ${chalk.bold(`${remainingDayRate.toPrecision(3).replace(`.`, `,`)} GB/day`)}`)
     }
   )
 })

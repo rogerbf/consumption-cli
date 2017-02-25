@@ -1,6 +1,6 @@
 {
   "name": "consumption-cli",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "check your current Tele2 subscription data usage",
   "main": "./distribution/index.js",
   "scripts": {
@@ -17,7 +17,8 @@
   },
   "keywords": [
     "Tele2",
-    "Mitt Tele2"
+    "Mitt Tele2",
+    "dataförbrukning"
   ],
   "author": "rogerbf <roger@bergfalk.nu> (http://bergfalk.nu/)",
   "license": "MIT",
