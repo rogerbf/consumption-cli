@@ -1,6 +1,6 @@
 {
   "ecmaVersion": 7,
-  "libs": [],
+  "libs": [ "ecmascript" ],
   "loadEagerly": [
     "source"
   ],

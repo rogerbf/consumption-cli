@@ -1,7 +1,7 @@
 {
   "name": "consumption-cli",
-  "version": "0.0.7",
-  "description": "check your current Tele2 subscription data usage",
+  "version": "1.0.0",
+  "description": "",
   "main": "./distribution/index.js",
   "scripts": {
     "test": "echo 'no tests'",
@@ -15,39 +15,31 @@
     "repl": "npm run build && babel-node",
     "nsp": "nsp check"
   },
-  "keywords": [
-    "Tele2",
-    "Mitt Tele2",
-    "dataförbrukning"
-  ],
+  "keywords": [],
   "author": "rogerbf <roger@bergfalk.nu> (http://bergfalk.nu/)",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.22.2",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-latest": "^6.22.0",
-    "babel-preset-stage-3": "^6.22.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-stage-3": "^6.24.1",
     "chokidar-cli": "^1.2.0",
-    "cross-env": "^3.1.4",
-    "eslint": "^3.14.1",
-    "eslint-config-standard": "^6.2.1",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^2.0.1",
-    "nsp": "^2.6.2",
-    "rimraf": "^2.5.4"
+    "cross-env": "^5.0.1",
+    "eslint": "^4.0.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-node": "^5.0.0",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "nsp": "^2.6.3",
+    "rimraf": "^2.6.1"
   },
   "files": [
     "distribution",
     "README.md"
   ],
-  "dependencies": {
-    "chalk": "^1.1.3",
-    "consumption": "^0.0.3",
-    "moment": "^2.17.1"
-  },
-  "bin": {
-    "consumption": "./distribution/index.js"
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rogerbf/consumption-cli.git"

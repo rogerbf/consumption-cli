@@ -1,7 +1,14 @@
 {
   "presets": [
-    "latest",
-    "stage-3"
+    "stage-3",
+    [
+      "env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ]
   ],
   "plugins": [
     "add-module-exports"
