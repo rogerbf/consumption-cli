@@ -50,5 +50,8 @@
   "bugs": {
     "url": "https://github.com/rogerbf/consumption-cli/issues"
   },
-  "homepage": "https://github.com/rogerbf/consumption-cli#readme"
+  "homepage": "https://github.com/rogerbf/consumption-cli#readme",
+  "bin": {
+    "consumption": "./distribution/binary/consumption.js"
+  }
 }
