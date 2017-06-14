@@ -39,7 +39,10 @@
     "distribution",
     "README.md"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "consumption": "^1.0.0",
+    "tty-table": "^2.5.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rogerbf/consumption-cli.git"
