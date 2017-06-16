@@ -4,6 +4,26 @@ const { version } = require(`../../package`)
 const consumption = require(`consumption`)
 const Table = require(`tty-table`)
 const main = require(`../index`)
+const extractProperties = require(`deep-project`)(`
+{
+  msisdn,
+  currentPriceplan {
+    UnlimitedData,
+    DisplayName
+  }
+  euBucket {
+    consumed,
+    total
+  }
+  mainBucket {
+    consumed,
+    leftToConsume,
+    total,
+    unitString,
+    toBeRestartedAtList
+  }
+}
+`)
 
 cli.version(version)
 
@@ -21,34 +41,8 @@ cli
         subscriptions ? { subscriptions: subscriptions.split(`,`) } : []
       ))
 
-      const buckets = dataBuckets.map(({
-        msisdn,
-        currentPriceplan: {
-          unlimitedData,
-          DisplayName
-        },
-        euBucket: {
-          consumed: euDataConsumed,
-          total: euDataTotal
-        },
-        mainBucket: {
-          consumed,
-          leftToConsume,
-          total,
-          unitString,
-          toBeRestartedAtList
-        }
-      }) => ({
-        msisdn,
-        unlimitedData,
-        DisplayName,
-        euBucket: { consumed: euDataConsumed, total: euDataTotal },
-        consumed,
-        leftToConsume,
-        total,
-        unitString,
-        toBeRestartedAtList
-      }))
+      const buckets = dataBuckets.map(bucket => extractProperties(bucket))
+
       console.log(JSON.stringify(buckets, null, 2))
     } catch (error) {
       console.log(error)

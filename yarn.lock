@@ -969,6 +969,10 @@ csv@^1.1.1:
     csv-stringify "^1.0.0"
     stream-transform "^0.1.0"
 
+curly-notation-to-dotpath@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/curly-notation-to-dotpath/-/curly-notation-to-dotpath-1.0.0.tgz#aaf0d6d5e39ac34740f83d38b661a05b174e2d4d"
+
 currently-unhandled@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
@@ -1014,6 +1018,13 @@ deep-extend@~0.4.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
+
+deep-project@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/deep-project/-/deep-project-1.0.0.tgz#97edec93bb53f81892f741a1920a86aa0cd69005"
+  dependencies:
+    curly-notation-to-dotpath "^1.0.0"
+    lodash-pickdeep "^1.0.2"
 
 defaults@^1.0.2, defaults@^1.0.3:
   version "1.0.3"
@@ -1953,6 +1964,12 @@ locate-path@^2.0.0:
     p-locate "^2.0.0"
     path-exists "^3.0.0"
 
+lodash-pickdeep@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/lodash-pickdeep/-/lodash-pickdeep-1.0.2.tgz#a8be89d2f1697063141a984440f716125e54c0ff"
+  dependencies:
+    lodash ">= 3.7.0"
+
 lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
@@ -1965,13 +1982,13 @@ lodash@3.0.x:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.0.1.tgz#14d49028a38bc740241d11e2ecd57ec06d73c19a"
 
+"lodash@>= 3.7.0", lodash@^4.0.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
+  version "4.17.4"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+
 lodash@^3.7.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
-
-lodash@^4.0.0, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
 loose-envify@^1.0.0:
   version "1.3.1"
