@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const cli = require(`commander`)
+const spinner = require(`ora`)
 const { version } = require(`../../package`)
 const consumption = require(`consumption`)
 const Table = require(`tty-table`)
@@ -34,6 +35,8 @@ cli
   .option(`-p, --password [password]`, `password used to log in to Mitt Tele2`)
   .option(`-s, --subscriptions [subscriptions]`, `choose specific subscription(s)`)
   .action(async ({ email, password, subscriptions }) => {
+    const loadingSpinner = spinner(`Fetching remaining data`).start()
+
     try {
       const dataBuckets = await consumption(Object.assign(
         {},
@@ -41,11 +44,13 @@ cli
         subscriptions ? { subscriptions: subscriptions.split(`,`) } : []
       ))
 
+      loadingSpinner.stop()
+
       const buckets = dataBuckets.map(bucket => extractProperties(bucket))
 
       console.log(JSON.stringify(buckets, null, 2))
     } catch (error) {
-      console.log(error)
+      loadingSpinner.fail(error)
     }
   })
 

@@ -43,6 +43,7 @@
     "commander": "^2.9.0",
     "consumption": "^1.0.0",
     "deep-project": "^1.0.0",
+    "ora": "^1.3.0",
     "tty-table": "^2.5.2"
   },
   "repository": {
