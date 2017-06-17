@@ -3,7 +3,7 @@ const cli = require(`commander`)
 const spinner = require(`ora`)
 const { version } = require(`../../package`)
 const consumption = require(`consumption`)
-const Table = require(`tty-table`)
+const table = require(`tty-table`)
 const main = require(`../index`)
 const extractProperties = require(`deep-project`)(`
 {
@@ -48,7 +48,30 @@ cli
 
       const buckets = dataBuckets.map(bucket => extractProperties(bucket))
 
-      console.log(JSON.stringify(buckets, null, 2))
+      console.log(
+        table(
+          [
+            { value: `Subscription` },
+            { value: `Description` },
+            { value: `Consumed` },
+            { value: `Remaining` },
+            { value: `Total` }
+          ],
+          buckets.map(
+            ({
+              msisdn,
+              currentPriceplan: { DisplayName },
+              mainBucket: { consumed, leftToConsume, total }
+            }) => [
+              msisdn,
+              DisplayName,
+              consumed.toFixed(2),
+              leftToConsume.toFixed(2),
+              total.toFixed(2)
+            ]
+          )
+        ).render()
+      )
     } catch (error) {
       loadingSpinner.fail(error)
     }
