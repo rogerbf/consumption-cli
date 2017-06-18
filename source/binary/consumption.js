@@ -60,14 +60,20 @@ cli
           buckets.map(
             ({
               msisdn,
-              currentPriceplan: { DisplayName },
-              mainBucket: { consumed, leftToConsume, total }
+              currentPriceplan: { DisplayName, UnlimitedData },
+              mainBucket: { consumed, leftToConsume, total, unitString }
             }) => [
               msisdn,
               DisplayName,
-              consumed.toFixed(2),
-              leftToConsume.toFixed(2),
-              total.toFixed(2)
+              UnlimitedData
+                ? `Unlimited`
+                : `${consumed.toFixed(2)} ${unitString}`,
+              UnlimitedData
+                ? `Unlimited`
+                : `${leftToConsume.toFixed(2)} ${unitString}`,
+              UnlimitedData
+                ? `Unlimited`
+                : `${total.toFixed(2)} ${unitString}`
             ]
           )
         ).render()
