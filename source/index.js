@@ -1,3 +1,1 @@
-const homedir = require(`os`).homedir()
-
-module.exports = {}
+module.exports = require(`consumption`)
