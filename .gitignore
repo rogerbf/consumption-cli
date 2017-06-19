@@ -5,3 +5,4 @@ package
 consumption-cli*.tgz
 npm-debug.log
 .vscode
+*.nocommit.*
