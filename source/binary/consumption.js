@@ -4,7 +4,6 @@ const spinner = require(`ora`)
 const { version } = require(`../../package`)
 const consumption = require(`consumption`)
 const table = require(`tty-table`)
-const main = require(`../index`)
 const extractProperties = require(`deep-project`)(`
 {
   msisdn,
@@ -14,6 +13,7 @@ const extractProperties = require(`deep-project`)(`
   }
   euBucket {
     consumed,
+    leftToConsume,
     total
   }
   mainBucket {
@@ -26,23 +26,16 @@ const extractProperties = require(`deep-project`)(`
 }
 `)
 
-cli.version(version)
-
 cli
-  .command(`get`)
-  .description(`get consumption`)
-  .option(`-e, --email [email address]`, `email address used to log in to Mitt Tele2`)
-  .option(`-p, --password [password]`, `password used to log in to Mitt Tele2`)
-  .option(`-s, --subscriptions [subscriptions]`, `choose specific subscription(s)`)
-  .action(async ({ email, password, subscriptions }) => {
-    const loadingSpinner = spinner(`Fetching remaining data`).start()
-
+  .version(version)
+  .arguments(`<email> <password> [subscriptions...]`)
+  .action(async (email, password, subscriptions) => {
+    const loadingSpinner = spinner(`fetching data usage`).start()
     try {
-      const dataBuckets = await consumption(Object.assign(
-        {},
-        { email, password },
-        subscriptions ? { subscriptions: subscriptions.split(`,`) } : []
-      ))
+      const dataBuckets = await consumption({ email, password, subscriptions })
+
+      process.env.NODE_ENV === `development` &&
+      console.log(JSON.stringify(dataBuckets, null, 2))
 
       loadingSpinner.stop()
 
@@ -53,36 +46,42 @@ cli
           [
             { value: `Subscription` },
             { value: `Description` },
-            { value: `Consumed` },
-            { value: `Remaining` },
-            { value: `Total` }
+            { value: `Consumed / EU` },
+            { value: `Remaining / EU` },
+            { value: `Total / EU` }
           ],
           buckets.map(
             ({
               msisdn,
               currentPriceplan: { DisplayName, UnlimitedData },
-              mainBucket: { consumed, leftToConsume, total, unitString }
-            }) => [
-              msisdn,
-              DisplayName,
+              mainBucket: { consumed, leftToConsume, total, unitString },
+              euBucket: { consumed: euConsumed, leftToConsume: euLeftToConsume, total: euTotal }
+            }) =>
               UnlimitedData
-                ? `Unlimited`
-                : `${consumed.toFixed(2)} ${unitString}`,
-              UnlimitedData
-                ? `Unlimited`
-                : `${leftToConsume.toFixed(2)} ${unitString}`,
-              UnlimitedData
-                ? `Unlimited`
-                : `${total.toFixed(2)} ${unitString}`
-            ]
+                ? [
+                  msisdn,
+                  DisplayName,
+                  `${consumed.toFixed(2)}${unitString} / ${euConsumed.toFixed(2)}${unitString}`,
+                  `Unlimited / ${euLeftToConsume.toFixed(2)}${unitString}`,
+                  `Unlimited / ${euTotal.toFixed(2)}${unitString}`
+                ]
+                : [
+                  msisdn,
+                  DisplayName,
+                  `${consumed.toFixed(2)}${unitString} / ${euConsumed.toFixed(2)}${unitString}`,
+                  `${leftToConsume.toFixed(2)}${unitString} / ${euLeftToConsume.toFixed(2)}${unitString}`,
+                  `${total.toFixed(2)}${unitString} / ${euTotal.toFixed(2)}${unitString}`
+                ]
           )
         ).render()
       )
     } catch (error) {
-      loadingSpinner.fail(error)
+      loadingSpinner.fail(
+        typeof (error) === `object` ? JSON.stringify(error) : error
+      )
+      process.exit()
     }
   })
-
-cli.parse(process.argv)
+  .parse(process.argv)
 
 process.argv.length < 3 && cli.help()
